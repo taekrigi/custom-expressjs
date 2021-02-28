@@ -1,0 +1,25 @@
+{
+  "name": "custom-expressjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha \"**/*.spec.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taekrigi/custom-expressjs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taekrigi/custom-expressjs/issues"
+  },
+  "homepage": "https://github.com/taekrigi/custom-expressjs#readme",
+  "dependencies": {
+    "mocha": "^8.3.0",
+    "should": "^13.2.3",
+    "sinon": "^9.2.4"
+  }
+}
