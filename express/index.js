@@ -11,19 +11,14 @@ const application = () => {
     _middleware.run(request(req), response(res));
   });
 
+  const _requestMapping = method => (path, callback) => {
+    callback._method = method;
+    use(path, callback)
+  }
+
   const use = (pathOrFunc, callback) => {
      if (callback) callback._path = pathOrFunc
     _middleware.add(callback)
-  }
-
-  const get = (path, callback) => {
-    callback._method = HttpMethod.GET;
-    use(path, callback)
-  }
-
-  const post = (path, callback) => {
-    callback._method = HttpMethod.POST;
-    use(path, callback)
   }
 
   const listen = (port = 3000, callback) => {
@@ -33,8 +28,10 @@ const application = () => {
 
   return {
     listen,
-    get,
-    post
+    get: _requestMapping(HttpMethod.GET),
+    post: _requestMapping(HttpMethod.POST),
+    put: _requestMapping(HttpMethod.PUT),
+    delete: _requestMapping(HttpMethod.DELETE),
   }
 }
 
