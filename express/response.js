@@ -1,14 +1,15 @@
-const response = (res) => {
+const { Header, ContentType } = require('./Constants')
 
+const response = (res) => {
   res.send = res.send || (text => {
-    if (!res.getHeader('Content-type')) {
-      res.setHeader('Content-type', 'text/plain')
+    if (!res.getHeader(Header.ContentType)) {
+      res.setHeader(Header.ContentType, ContentType.Text)
     }
     res.end(text);
   })
 
   res.json = res.json || (data => {
-    res.setHeader("Content-Type", "application/json")
+    res.setHeader(Header.ContentType, ContentType.Json)
     res.end(JSON.stringify(data))
   })
 

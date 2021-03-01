@@ -1,3 +1,5 @@
+const { HttpMethod } = require("./Constants");
+
 const middleware = () => {
   const _middlewares = []
 
@@ -24,7 +26,7 @@ const middleware = () => {
 
       if (currentMW._path) {
         const pathMatched = req.url === currentMW._path && 
-              req.method.toUpperCase() === currentMW._method || 'GET';
+              req.method.toUpperCase() === currentMW._method || HttpMethod.GET;
         return pathMatched ? currentMW(res, res, nextMW) : _run(req, res)(i + 1);
       }
 

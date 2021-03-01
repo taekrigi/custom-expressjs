@@ -2,15 +2,9 @@ const http = require('http');
 const middleware = require('./middleware')
 const request = require('./request')
 const response = require('./response')
+const { HttpMethod } = require("./Constants");
 
 const application = () => {
-  const HttpMethod = {
-    GET: 'GET',
-    POST: 'POST',
-    PUT: 'PUT',
-    DELETE: 'DELETE'
-  }
-
   const _middleware = middleware();
 
   const _server = http.createServer((req, res) => {
