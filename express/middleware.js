@@ -10,10 +10,17 @@ const middleware = () => {
   }
 
   const _run = (req, res) => {
-    return i => {
+    return (i, err) => {
       if (i < 0 || i >= _middlewares.length) return
       const currentMW = _middlewares[i]
       const nextMW = _middlewares[i + 1] || null
+
+      if (err) {
+        const isCurrentMWErrorMW = nextMW.length === 4
+        return isCurrentMWErrorMW ? 
+          currentMW(err, req, res, nextMW) 
+          : _run(req, res)(i + 1, err)
+      }
 
       if (currentMW._path) {
         const pathMatched = req.url === currentMW._path && 

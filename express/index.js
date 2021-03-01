@@ -1,5 +1,7 @@
 const http = require('http');
 const middleware = require('./middleware')
+const request = require('./request')
+const response = require('./response')
 
 const application = () => {
   const HttpMethod = {
@@ -12,7 +14,7 @@ const application = () => {
   const _middleware = middleware();
 
   const _server = http.createServer((req, res) => {
-    _middleware.run(req, res);
+    _middleware.run(request(req), response(res));
   });
 
   const use = (pathOrFunc, callback) => {
