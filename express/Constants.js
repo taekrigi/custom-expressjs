@@ -11,5 +11,6 @@ exports.Header = {
 
 exports.ContentType = {
   Text: 'text/plain',
+  Html: 'text/html',
   Json: 'application/json'
 }

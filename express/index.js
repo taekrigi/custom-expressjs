@@ -17,7 +17,12 @@ const application = () => {
   }
 
   const use = (pathOrFunc, callback) => {
-     if (callback) callback._path = pathOrFunc
+    if (typeof pathOrFunc === "function") {
+      callback = pathOrFunc;
+    } else if (typeof pathOrFunc === "string") {
+      callback._path = pathOrFunc
+    }
+
     _middleware.add(callback)
   }
 
@@ -28,11 +33,14 @@ const application = () => {
 
   return {
     listen,
+    use,
     get: _requestMapping(HttpMethod.GET),
     post: _requestMapping(HttpMethod.POST),
     put: _requestMapping(HttpMethod.PUT),
     delete: _requestMapping(HttpMethod.DELETE),
   }
 }
+
+application.bodyParser = require('./middlewares/bodyParser')
 
 module.exports = application;

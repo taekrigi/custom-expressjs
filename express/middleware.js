@@ -15,18 +15,19 @@ const middleware = () => {
     return (i, err) => {
       if (i < 0 || i >= _middlewares.length) return
       const currentMW = _middlewares[i]
-      const nextMW = _middlewares[i + 1] || null
+      const nextMW = err => _run(req, res)(i + 1, err);
 
       if (err) {
-        const isCurrentMWErrorMW = nextMW.length === 4
+        const isCurrentMWErrorMW = currentMW.length === 4
+
         return isCurrentMWErrorMW ? 
           currentMW(err, req, res, nextMW) 
           : _run(req, res)(i + 1, err)
       }
-
+      
       if (currentMW._path) {
-        const pathMatched = req.url === currentMW._path && 
-              req.method.toUpperCase() === currentMW._method || HttpMethod.GET;
+        const pathMatched = req.path === currentMW._path && 
+              req.method.toUpperCase() === (currentMW._method || HttpMethod.GET);
         return pathMatched ? currentMW(res, res, nextMW) : _run(req, res)(i + 1);
       }
 
