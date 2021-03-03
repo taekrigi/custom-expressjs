@@ -1,6 +1,6 @@
 const { Header, ContentType } = require('../Constants')
 
-const bodyParsr = () => (req, res, next) => {
+const BodyParser = () => (req, res, next) => {
   const contentType = req.headers[Header.ContentType]
 
   const body = []
@@ -28,4 +28,4 @@ const bodyParsr = () => (req, res, next) => {
   })
 }
 
-module.exports = bodyParsr
+module.exports = BodyParser
