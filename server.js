@@ -1,7 +1,8 @@
 const express = require('./express')
 const app = express()
-const PORT = 3001
+const PORT = 3000
 
+app.use(express.static())
 app.use(express.bodyParser())
 
 app.get('/', (req, res) => {
@@ -21,5 +22,5 @@ app.use((req, res, next) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`)
+  ;`App listening on port ${PORT}!`
 })

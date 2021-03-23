@@ -3,6 +3,11 @@ const { Header, ContentType } = require('../Constants')
 const bodyParser = () => (req, res, next) => {
   const contentType = req.headers[Header.ContentType]
 
+  if (contentType !== 'application/json') {
+    next()
+    return
+  }
+
   const body = []
 
   req.on('data', (chunk) => {
